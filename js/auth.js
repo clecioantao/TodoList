@@ -1,19 +1,14 @@
+// funçao que trata submissao form autenticação
 authForm.onsubmit = function (event) {
+  showItem(loading);
   event.preventDefault()
   if (authForm.submitAuthForm.innerHTML == 'Acessar') {
-    firebase.auth().signInWithEmailAndPassword(authForm.email.value, authForm.password.value).then(function (user) {
-
-      console.log('Acessou com sucesso')
-      console.log(user)
-    }).catch(function (error) {
+    firebase.auth().signInWithEmailAndPassword(authForm.email.value, authForm.password.value).catch(function (error) {
       console.log('Falha no acesso')
       console.log(error)
     })
   } else {
-    firebase.auth().createUserWithEmailAndPassword(authForm.email.value, authForm.password.value).then(function (user) {
-      console.log('Cadastrou com sucesso')
-      console.log(user)
-    }).catch(function (error) {
+    firebase.auth().createUserWithEmailAndPassword(authForm.email.value, authForm.password.value).catch(function (error) {
       console.log('Falha no cadastro')
       console.log(error)
     })
@@ -21,10 +16,20 @@ authForm.onsubmit = function (event) {
   }
 }
 
+// funçao que centraliza e trata autenticação
 firebase.auth().onAuthStateChanged(function (user) {
+    hideItem(loading);
     if(user){
-        console.log(`usuario antenticado: ${user}`);
+        showUserContent(user);
     } else {
-        console.log(`usuario NAO antenticado: ${user}`);
+        showAuth();
     }
 })
+
+// funçao que permite ao usuario sair da conta pessoal
+function signOut(){
+  firebase.auth().signOut().catch(function (error) {
+  console.log("Falha ao sair")
+  console.log(error)
+  })
+}

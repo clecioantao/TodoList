@@ -10,7 +10,12 @@
   <div id="app">
     <!--Logotipo do TodoList-->
     <div class="center">
-      <img src="img/todoList.png">
+      <img src="img/natura.jpeg">
+    </div>
+
+    <!-- Feedback carrgamento -->
+    <div id="loading">
+      <img src="img/loading.gif" alt="Loading" />
     </div>
 
     <!--Conteúdo destinado para usuários não autenticados-->
@@ -40,7 +45,20 @@
         <button onclick="toggleToAccess()" class="alternative">Acesse a sua conta</button>
       </p>
     </div>
+
+    <!-- Conteudo destinado para usuarios autenticados -->
+    <div id="userContent" class="startHidden" >
+      <hr>
+      <div id="userInfo" class="center">
+        <p>Usuario autenticado</p>
+        <p id="userEmail"></p>
+        <button class="alternative" onclick="signOut()">Sair</button>
+      </div>
+    </div>
+
+
   </div>
+
 
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js""></script>
   <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-auth.js"></script>
